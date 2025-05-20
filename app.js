@@ -20,7 +20,7 @@ const reviewsRouter = require("./routes/review.js");
 const listingsRouter = require("./routes/listing.js")
 const userRouter = require("./routes/user.js");
 
-const db_url = process.env.ATLAS_DB_URL;
+const db_url = process.env.ATLASDB_URL;
 
 main().then(() => {
     console.log("connected to DB")
