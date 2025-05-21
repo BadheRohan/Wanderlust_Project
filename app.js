@@ -79,6 +79,9 @@ app.use((req, res, next) => {
     res.locals.curruser = req.user; 
 });
 
+app.get("/", (req, res) => {
+    res.send("Server is up and running!");
+});
 
 
 app.use("/listings", listingsRouter);
