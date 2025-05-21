@@ -79,6 +79,11 @@ app.use((req, res, next) => {
     res.locals.curruser = req.user; 
 });
 
+app.get('/', (req, res) => {
+  res.send('Hello from your app!');
+});
+
+
 app.use("/listings", listingsRouter);
 app.use("/listings/:id/reviews", reviewsRouter);
 app.use("/", userRouter)
@@ -96,6 +101,7 @@ app.use((err, req, res, next) => {
 
 
 const port = process.env.PORT || 8080;
-app.listen(port, '0.0.0.0', () => {
+const host = '0.0.0.0';
+app.listen(port,host, () => {
     console.log(`Server is listening on port ${port}`);
 });
