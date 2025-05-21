@@ -79,9 +79,6 @@ app.use((req, res, next) => {
     res.locals.curruser = req.user; 
 });
 
-app.get('/', (req, res) => {
-  res.send('Hello from your app!');
-});
 
 
 app.use("/listings", listingsRouter);
@@ -100,8 +97,7 @@ app.use((err, req, res, next) => {
 });
 
 
-const port = process.env.PORT || 8080;
-const host = '0.0.0.0';
-app.listen(port,host, () => {
+const port = process.env.PORT;
+app.listen(port, () => {
     console.log(`Server is listening on port ${port}`);
 });
