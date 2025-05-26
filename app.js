@@ -20,7 +20,11 @@ const reviewsRouter = require("./routes/review.js");
 const listingsRouter = require("./routes/listing.js")
 const userRouter = require("./routes/user.js");
 
-const db_url = process.env.ATLASDB_URL;
+//local host 
+const MongoUrl = "mongodb://127.0.0.1:27017/wanderlust";
+
+
+const db_url = process.env.ATLASDB_URL || MongoUrl;
 
 main().then(() => {
     console.log("connected to DB")
@@ -77,6 +81,7 @@ app.use((req, res, next) => {
     res.locals.success = req.flash("success");
     res.locals.error = req.flash("error");
     res.locals.curruser = req.user; 
+    next();
 });
 
 
@@ -91,17 +96,20 @@ app.use("/", userRouter)
 // });
 
 app.use((err, req, res, next) => {
-    let { statuscode, message } = err;
-    res.render("error.ejs", { message });
+    let { statuscode = 500, message = "Something went wrong" } = err;
+    res.status(statuscode).render("error.ejs", { message });
+    next();
 });
 
 
-const port = process.env.PORT;
-if (!port) {
-  throw new Error("PORT not defined in environment");
-}
+const port = process.env.PORT || 10000;
+// const host = '0.0.0.0';
+
+// app.listen(port, host, () => {
+//   console.log(`✅ Server listening on ${host}:${port}`);
+// });
 
 app.listen(port, () => {
-  console.log(`✅ Server is listening on port ${port}`);
-});
+    console.log(`server is listening to port ${port}`)
+})
 
