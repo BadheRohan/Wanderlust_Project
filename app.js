@@ -104,10 +104,6 @@ app.use((err, req, res, next) => {
 
 const port = process.env.PORT || 8080;
 
-app.get('/', (req, res) => {
-    res.send('Welcome to the backend API!');
-});
-
 
 app.listen(port, () => {
     console.log(`server is listening to port ${port}`)
