@@ -102,12 +102,7 @@ app.use((err, req, res, next) => {
 });
 
 
-const port = process.env.PORT || 10000;
-// const host = '0.0.0.0';
-
-// app.listen(port, host, () => {
-//   console.log(`✅ Server listening on ${host}:${port}`);
-// });
+const port = process.env.PORT || 8080;
 
 app.get('/', (req, res) => {
     res.send('Welcome to the backend API!');
