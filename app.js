@@ -46,13 +46,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 const store = MongoStore.create({
     mongoUrl: db_url,
     crypto: {
-        secret:process.env.SECRET,
+        secret: process.env.SECRET,
     },
     touchAfter: 24 * 3600,
 });
 
 store.on("error", () => {
-    console.log("error in mongpo session store",err)
+    console.log("error in mongpo session store", err)
 });
 
 const sessionOptions = {
@@ -80,7 +80,7 @@ passport.deserializeUser(User.deserializeUser());
 app.use((req, res, next) => {
     res.locals.success = req.flash("success");
     res.locals.error = req.flash("error");
-    res.locals.curruser = req.user; 
+    res.locals.curruser = req.user;
     next();
 });
 
@@ -108,6 +108,11 @@ const port = process.env.PORT || 10000;
 // app.listen(port, host, () => {
 //   console.log(`✅ Server listening on ${host}:${port}`);
 // });
+
+app.get('/', (req, res) => {
+    res.send('Welcome to the backend API!');
+});
+
 
 app.listen(port, () => {
     console.log(`server is listening to port ${port}`)
